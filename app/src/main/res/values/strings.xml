@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">YandexCup2023</string>
+    <string name="guitar">гитара</string>
+    <string name="percussion">ударные</string>
+    <string name="brass">духовые</string>
+    <string name="volume">громкость</string>
+    <string name="speed">скорость</string>
+    <string name="layers">Слои</string>
+
+    <!--Samples-->
+    <string name="sample_guitar_high">Гитара 1</string>
+    <string name="sample_guitar_low">Гитара 2</string>
+    <string name="sample_snare">Снэр</string>
+    <string name="sample_snare_muffled">Снэр приглушённый</string>
+    <string name="sample_clarinet">Кларнет</string>
+    <string name="sample_saxophone">Саксофон</string>
+
+    <!--Layer title-->
+    <string name="layer_guitar">Гитара %1$d</string>
+    <string name="layer_percussion">Yдарные %1$d</string>
+    <string name="layer_brass">Духовые %1$d</string>
+    <string name="layer_microphone">Микрофон %1$d</string>
+</resources>
