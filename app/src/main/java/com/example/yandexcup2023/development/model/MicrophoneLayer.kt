@@ -13,6 +13,7 @@ class MicrophoneLayer(
     private val player = MediaPlayer()
 
     init {
+        ++number
         player.setDataSource(filePath)
         player.prepare()
         player.setOnCompletionListener {
@@ -24,11 +25,9 @@ class MicrophoneLayer(
     override fun play() {
         if (_isActive.value) {
             player.pause()
-            player.seekTo(0)
-            player.start()
-        } else {
-            player.start()
         }
+        player.seekTo(0)
+        player.start()
         _isActive.value = true
     }
 
@@ -55,7 +54,6 @@ class MicrophoneLayer(
 
     override fun unMute() {
         _isMuted.value = false
-        player.seekTo(0)
         player.setVolume(currentVolume, currentVolume)
     }
 
@@ -66,5 +64,10 @@ class MicrophoneLayer(
     }
 
     override fun repeat() {
+    }
+
+    companion object {
+        var number: Int = 1
+            private set
     }
 }

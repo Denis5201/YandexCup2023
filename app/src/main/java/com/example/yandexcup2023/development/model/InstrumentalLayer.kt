@@ -4,8 +4,10 @@ import android.content.Context
 import android.media.MediaPlayer
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import kotlin.math.roundToLong
 
 class InstrumentalLayer(
     context: Context,
@@ -16,8 +18,10 @@ class InstrumentalLayer(
 ) : Layer(maxVolumeValue, maxSpeedValue, name) {
 
     private val player = MediaPlayer.create(context, sample.resId)
+    private var job: Job? = null
 
     init {
+        number++
         player.setVolume(0.5f, 0.5f)
         play()
     }
@@ -33,7 +37,7 @@ class InstrumentalLayer(
 
     override fun setSpeedBoost(value: Float) {
         val currentSpeed = (sample.defaultDelay * value / maxSpeedValue).coerceIn(0f, sample.defaultDelay.toFloat())
-        this.currentSpeedBoost = currentSpeed.toLong()
+        this.currentSpeedBoost = currentSpeed.roundToLong()
     }
 
     override fun mute() {
@@ -52,12 +56,18 @@ class InstrumentalLayer(
     }
 
     override fun repeat() {
-        CoroutineScope(Dispatchers.Default).launch {
+        job?.cancel()
+        job = CoroutineScope(Dispatchers.Default).launch {
             while (isActive.value) {
                 player.seekTo(0)
                 player.start()
-                delay(sample.defaultDelay - currentSpeedBoost)
+                delay(sample.defaultDelay - currentSpeedBoost + 300)
             }
         }
+    }
+
+    companion object {
+        var number: Int = 1
+            private set
     }
 }

@@ -32,8 +32,8 @@ import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
 import com.example.yandexcup2023.R
 import com.example.yandexcup2023.development.model.Layer
-import com.example.yandexcup2023.development.model.MicrophoneLayer
 import java.io.File
+import java.time.Instant
 
 const val BOTTOM_BAR_SIZE = 34
 const val RECORD_TRACK_FILE_NAME = "record.mp3"
@@ -115,10 +115,9 @@ fun BottomBar(
                                     context, Manifest.permission.RECORD_AUDIO
                                 )
                             ) {
-                                val number = layers.filterIsInstance<MicrophoneLayer>().size + 1
                                 if (isAllTrackRecording) return@clickable
                                 startMicrophoneRecording(
-                                    File(context.filesDir, "$number.mp3").absolutePath
+                                    File(context.filesDir, "${Instant.now().epochSecond}.mp3").absolutePath
                                 )
                             } else {
                                 launcher.launch(Manifest.permission.RECORD_AUDIO)

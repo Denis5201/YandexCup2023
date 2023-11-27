@@ -65,9 +65,7 @@ class DevelopmentViewModel : ViewModel() {
     fun addSample(context: Context, sample: Sample) {
         val newLayer = InstrumentalLayer(
             context, sample, maxVolumeValue, maxSpeedValue,
-            "${context.resources.getString(sample.name)} ${_state.value.layerList
-                .filterIsInstance<InstrumentalLayer>()
-                .filter { it.sample == sample }.size + 1}"
+            "${InstrumentalLayer.number} ${context.resources.getString(sample.name)}"
         )
         _state.value = _state.value.copy(
             layerList = _state.value.layerList.plus(newLayer),
@@ -83,9 +81,7 @@ class DevelopmentViewModel : ViewModel() {
         val defaultSample = availableSamples.first { it.type == instrument }
         val newLayer = InstrumentalLayer(
             context, defaultSample, maxVolumeValue, maxSpeedValue,
-            "${context.resources.getString(defaultSample.name)} ${_state.value.layerList
-                .filterIsInstance<InstrumentalLayer>()
-                .filter { it.sample == defaultSample }.size + 1}"
+            "${InstrumentalLayer.number} ${context.resources.getString(defaultSample.name)}"
         )
         _state.value = _state.value.copy(
             layerList = _state.value.layerList.plus(newLayer),
@@ -148,8 +144,7 @@ class DevelopmentViewModel : ViewModel() {
             val newLayer = MicrophoneLayer(
                 maxVolumeValue, maxSpeedValue,
                 context.resources.getString(
-                    R.string.layer_microphone, _state.value.layerList
-                        .filterIsInstance<MicrophoneLayer>().size + 1
+                    R.string.layer_microphone, MicrophoneLayer.number
                 ),
                 state.value.currentRecorderFileRoute
                 )

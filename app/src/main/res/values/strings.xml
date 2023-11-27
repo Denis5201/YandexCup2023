@@ -16,8 +16,5 @@
     <string name="sample_saxophone">Саксофон</string>
 
     <!--Layer title-->
-    <string name="layer_guitar">Гитара %1$d</string>
-    <string name="layer_percussion">Yдарные %1$d</string>
-    <string name="layer_brass">Духовые %1$d</string>
     <string name="layer_microphone">Микрофон %1$d</string>
 </resources>
